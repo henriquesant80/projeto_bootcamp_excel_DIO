@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050b0a">
+<title>Santonela Invest — Flashcards Interativos</title>
+<style>
+:root{--bg:#050b0a;--p:#0b1715;--p2:#0e1d1b;--g:#d9a85c;--g2:#f0c77b;--txt:#f5efe5;--mut:#a9b0ad;--ln:rgba(217,168,92,.38);--gr:#1d8b72}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 88% 3%,rgba(217,168,92,.14),transparent 24%),radial-gradient(circle at 5% 30%,rgba(29,139,114,.09),transparent 26%),linear-gradient(135deg,#030807,#081210 52%,#040908);color:var(--txt);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{width:min(1180px,calc(100% - 24px));margin:auto}
+
+/* Banner de Topo */
+.banner-container{width:100%;margin-bottom:16px;border-radius:18px;overflow:hidden;border:1px solid var(--ln);box-shadow:0 8px 30px #0008;background:#030807}
+.banner-img{width:100%;height:auto;max-height:260px;object-fit:cover;display:block}
+
+.hero{padding:10px 0 18px}.brand{border:1px solid var(--ln);border-radius:22px;padding:22px;background:linear-gradient(110deg,rgba(255,255,255,.025),rgba(217,168,92,.07)),var(--p);box-shadow:0 14px 40px #0007;position:relative;overflow:hidden}.brand:after{content:"";position:absolute;right:-90px;top:-130px;width:310px;height:310px;border-radius:50%;border:1px solid #d9a85c33;box-shadow:0 0 0 35px #d9a85c08,0 0 0 70px #d9a85c05}.top{display:flex;align-items:center;gap:16px;position:relative;z-index:1}.logo{width:62px;height:62px;border:2px solid var(--g);display:grid;place-items:center;color:var(--g2);font:38px Georgia,serif;flex:none}.kicker{font-size:11px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:var(--g2)}h1{margin:3px 0 5px;font:clamp(26px,5vw,44px) Georgia,serif;letter-spacing:.03em}.sub{margin:0;color:var(--mut);font-size:14px}.quote{margin:18px 0 0;padding:13px 15px;border-left:3px solid var(--g);background:#d9a85c0d;color:#dfd8ca;border-radius:0 10px 10px 0;font:15px Georgia,serif}
+
+/* Estilo das Abas de Categoria */
+.tab-container{display:flex;gap:12px;margin-top:16px;position:relative;z-index:2}
+.tab-btn{flex:1;padding:14px 18px;border:1px solid var(--ln);background:rgba(11,23,21,0.8);color:var(--txt);border-radius:14px;font-weight:900;font-size:14px;cursor:pointer;transition:all .3s ease;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px}
+.tab-btn:hover{background:var(--p2);border-color:var(--g2)}
+.tab-btn.active{background:linear-gradient(135deg,#b77d32,#e0b86d);color:#15100a;border-color:var(--g2);box-shadow:0 4px 20px rgba(217,168,92,0.3)}
+
+.controls{position:sticky;top:0;z-index:20;padding:10px 0;background:#050b0adc;backdrop-filter:blur(15px);border-bottom:1px solid #d9a85c1f}.row{display:flex;gap:8px;flex-wrap:wrap}.search{flex:1 1 240px;min-width:170px;background:#091310;border:1px solid #ffffff1c;color:var(--txt);border-radius:11px;padding:11px 12px;outline:0}.search:focus{border-color:var(--g)}button{font:inherit;cursor:pointer}.btn{border:1px solid var(--ln);background:#0c1917;color:var(--txt);border-radius:11px;padding:10px 12px;font-weight:800;font-size:12px}.btn.primary{background:linear-gradient(135deg,#b77d32,#e0b86d);color:#15100a}.filters{display:flex;gap:7px;overflow:auto;padding-top:8px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{white-space:nowrap;border:1px solid #ffffff18;background:#0a1513;color:#c9ceca;border-radius:999px;padding:8px 11px;font-size:11px;font-weight:800}.filter.active{background:var(--g2);color:#171108;border-color:var(--g2)}
+.progress{padding:17px 0 2px}.ph{display:flex;justify-content:space-between;color:var(--mut);font-size:12px;margin-bottom:6px}.ph strong{color:var(--g2)}.bar{height:7px;background:#13201e;border-radius:99px;overflow:hidden}.bar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gr),var(--g2));transition:.3s}
+.section{margin:26px 0 11px;display:flex;align-items:center;gap:10px}.sn{width:34px;height:34px;border:1px solid var(--ln);border-radius:10px;display:grid;place-items:center;color:var(--g2);font-weight:900;background:#d9a85c0d}.section h2{margin:0;font:20px Georgia,serif}.section small{margin-left:auto;color:var(--mut);font-size:11px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card{min-height:245px;perspective:1000px;cursor:pointer}.inner{position:relative;width:100%;height:100%;min-height:245px;transform-style:preserve-3d;transition:transform .52s cubic-bezier(.2,.7,.2,1)}.card.flipped .inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid #d9a85c47;border-radius:16px;background:linear-gradient(145deg,#0c1917,#08110f);padding:17px;display:flex;flex-direction:column;box-shadow:0 8px 24px #0004}.back{transform:rotateY(180deg);border-color:#d9a85c88;background:linear-gradient(145deg,#101e1a,#0a1513)}.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f2c879,#b47b2e);color:#171108;font-weight:900;margin-bottom:13px}.label{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--g);font-weight:900}.q{font:18px/1.36 Georgia,serif;margin-top:7px}.a{font-size:14px;line-height:1.55;margin:11px 0;color:#e2e1dc}.tip{margin-top:auto;padding:9px 10px;background:#1d8b7217;border:1px solid #1d8b7238;color:#b8d6cd;font-size:11px;line-height:1.4;border-radius:9px}.tap{margin-top:auto;text-align:center;color:#89938f;font-size:10px;text-transform:uppercase;letter-spacing:.08em}.back .tap{color:var(--g)}.empty{padding:35px;text-align:center;border:1px dashed #d9a85c55;border-radius:15px;color:var(--mut);margin:20px 0}.hidden{display:none!important}.foot{text-align:center;border-top:1px solid #d9a85c33;margin:40px 0 22px;padding:22px;color:var(--mut);font-size:11px}.foot b{display:block;color:var(--g2);font:17px Georgia,serif;margin-bottom:6px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:580px){.wrap{width:calc(100% - 16px)}.hero{padding-top:8px}.brand{padding:17px;border-radius:16px}.logo{width:52px;height:52px;font-size:31px}.kicker{font-size:9px;letter-spacing:.17em}h1{font-size:26px}.sub{font-size:12px}.quote{font-size:13px}.row{display:grid;grid-template-columns:1fr 1fr}.search{grid-column:1/-1;width:100%}.btn{font-size:11px;padding:10px 7px}.grid{grid-template-columns:1fr;gap:10px}.card,.inner{min-height:230px}.q{font-size:18px}.a{font-size:14px}.section{margin-top:23px}.section small{display:none}.tab-container{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <!-- Banner Santonela Invest -->
+  <div class="banner-container">
+    <img src="images/banner_santonela.png" alt="Santonela Invest Banner" class="banner-img" onerror="this.style.display='none'">
+  </div>
+
+  <div class="brand">
+    <div class="top">
+      <div class="logo">S</div>
+      <div>
+        <div class="kicker">Santonela Invest</div>
+        <h1>Filtro de Oportunidades</h1>
+        <p class="sub">Plataforma interativa de estudos para análise de mercado</p>
+      </div>
+    </div>
+    <div class="quote" id="hero-quote">“O objetivo não é encontrar o ativo mais barato. É aprender a investigar se o preço faz sentido diante da qualidade do negócio.”</div>
+    
+    <!-- Abas Principais -->
+    <div class="tab-container">
+      <button class="tab-btn active" id="tab-acoes" onclick="switchCategory('acoes')">
+        📈 Módulo Ações (50 Cards)
+      </button>
+      <button class="tab-btn" id="tab-fiis" onclick="switchCategory('fiis')">
+        🏢 Módulo Fundos Imobiliários (50 Cards)
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="controls">
+  <div class="wrap">
+    <div class="row">
+      <input id="search" class="search" type="search" placeholder="🔎 Buscar pergunta, indicador ou palavra...">
+      <button class="btn primary" id="shuffle">🔀 Embaralhar</button>
+      <button class="btn" id="all">👁 Mostrar respostas</button>
+      <button class="btn" id="reset">↺ Reiniciar</button>
+    </div>
+    <div class="filters" id="filter-buttons">
+      <!-- Filtros gerados via JavaScript -->
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="progress">
+    <div class="ph">
+      <span>Progresso de estudo no módulo</span>
+      <strong id="pt">0 de 50 respondidos</strong>
+    </div>
+    <div class="bar"><i id="pb"></i></div>
+  </div>
+  <div id="sections"></div>
+  <div id="empty" class="empty hidden">Nenhum flashcard encontrado. Tente outra palavra.</div>
+  <footer class="foot">
+    <b>ESTUDO + DISCIPLINA = MELHORES DECISÕES</b>
+    Toque ou clique em um cartão para revelar a resposta. O progresso de cada aba fica salvo neste navegador.
+  </footer>
+</main>
+
+<script>
+// Base de dados dividida em Ações e Fundos Imobiliários
+const database = {
+  acoes: {
+    quote: "“O objetivo não é encontrar a ação mais barata. É aprender a investigar se o preço faz sentido diante da empresa.”",
+    info: {
+      "empresa": ["1", "ENTENDENDO A EMPRESA", "Comece pelo negócio e pelos resultados."],
+      "preco": ["2", "O PREÇO DA AÇÃO", "Entenda os múltiplos antes de julgar o preço."],
+      "retorno": ["3", "RETORNO AO ACIONISTA", "Dividendos fazem parte da análise, não são tudo."],
+      "oportunidade": ["4", "RACIONAL DE OPORTUNIDADE", "Preço baixo ou alto precisa de contexto."],
+      "filtro": ["5", "O FILTRO COMPLETO", "Junte as peças antes de tirar conclusões."]
+    },
+    cards: [
+      {"n": 1, "c": "empresa", "q": "Qual é o primeiro passo ao analisar uma ação?", "a": "Não começar pelo preço. Primeiro entender <b>a empresa e seus resultados</b>.", "t": "Comece pelo negócio, não pela cotação."},
+      {"n": 2, "c": "empresa", "q": "O que devo analisar primeiro na empresa?", "a": "<b>Receita, lucro, ROE, dívida e geração de caixa.</b>", "t": "Esses pontos formam uma visão inicial da saúde da empresa."},
+      {"n": 3, "c": "empresa", "q": "O que devo perguntar sobre a receita?", "a": "<b>A empresa está conseguindo aumentar sua receita ao longo do tempo?</b>", "t": "Observe a evolução, não apenas um ano."},
+      {"n": 4, "c": "empresa", "q": "O que devo perguntar sobre o lucro?", "a": "<b>O lucro é consistente? Está crescendo ou diminuindo?</b>", "t": "A direção dos resultados ajuda a entender a história da empresa."},
+      {"n": 5, "c": "empresa", "q": "Por que olhar a evolução do lucro é mais importante que olhar apenas o lucro atual?", "a": "Porque queremos saber <b>a direção da empresa</b>: se os resultados estão melhorando ou piorando.", "t": "Compare vários períodos."},
+      {"n": 6, "c": "empresa", "q": "O que é ROE?", "a": "É o <b>retorno sobre o patrimônio</b>. Ajuda a entender quanto lucro a empresa gera utilizando o capital dos acionistas.", "t": "Use o ROE para avaliar eficiência, considerando o setor."},
+      {"n": 7, "c": "empresa", "q": "O que uma dívida elevada significa?", "a": "Não significa automaticamente que a empresa é ruim. Verifique se ela consegue <b>gerar caixa suficiente para administrar e pagar essa dívida</b>.", "t": "Dívida deve ser relacionada à capacidade de pagamento."},
+      {"n": 8, "c": "empresa", "q": "Por que analisar a geração de caixa?", "a": "Porque <b>lucro contábil e dinheiro efetivamente gerado não são exatamente a mesma coisa</b>.", "t": "O caixa mostra outra dimensão importante da realidade financeira."},
+      {"n": 9, "c": "empresa", "q": "O que é Margem Líquida?", "a": "Porcentagem da receita que sobra como <b>lucro líquido</b> após todas as despesas e impostos.", "t": "Margens altas indicam vantagens competitivas ou eficiência."},
+      {"n": 10, "c": "empresa", "q": "O que representa o Ebitda?", "a": "O lucro operacional antes de juros, impostos, depreciação e amortização. Mede a <b>operação pura</b> do negócio.", "t": "Útil para comparar empresas do mesmo setor sem distorção tributária."},
+      {"n": 11, "c": "empresa", "q": "O que são setores perenes no mercado de ações?", "a": "Setores que prestam serviços essenciais e continuam demandados mesmo em crises (ex: Energia, Saneamento, Bancos).", "t": "Oferecem maior previsibilidade de resultados."},
+      {"n": 12, "c": "empresa", "q": "O que é Governança Corporativa?", "a": "Conjunto de práticas que alinham a gestão com o interesse dos acionistas (transparência, ética, tratamento justo aos minoritários).", "t": "Empresas com boa governança reduzem riscos de fraude ou má gestão."},
+      {"n": 13, "c": "empresa", "q": "O que significa o Nível Novo Mercado da B3?", "a": "O segmento de mais alto padrão de governança na bolsa brasileira, onde a empresa só possui ações ordinárias (ON).", "t": "Garante Tag Along de 100% para acionistas minoritários."},
+      {"n": 14, "c": "empresa", "q": "O que é Vantagem Competitiva (Fosso Econômico / Moat)?", "a": "Diferencial que impede os concorrentes de copiarem facilmente a empresa (marcas fortes, patentes, ganho de escala).", "t": "Permite manter margens de lucro altas por longos anos."},
+      {"n": 15, "c": "preco", "q": "Depois de analisar a empresa, o que devo analisar?", "a": "Se o <b>preço atual parece razoável</b> em relação aos resultados e ao histórico da empresa.", "t": "Primeiro negócio; depois preço."},
+      {"n": 16, "c": "preco", "q": "O que é P/L?", "a": "<b>Preço/Lucro.</b> Indica quantas vezes o lucro anual está sendo considerado no preço da ação.", "t": "Compare com o histórico e com empresas semelhantes."},
+      {"n": 17, "c": "preco", "q": "P/L baixo significa que a ação está barata?", "a": "<b>Não necessariamente.</b> Pode existir algum problema ou expectativa negativa que explique o múltiplo baixo.", "t": "Múltiplo baixo é ponto de investigação."},
+      {"n": 18, "c": "preco", "q": "Como analisar melhor o P/L?", "a": "Compare com <b>o histórico da própria empresa</b> e, quando fizer sentido, com empresas semelhantes.", "t": "Contexto é fundamental."},
+      {"n": 19, "c": "preco", "q": "O que é P/VP?", "a": "<b>Preço/Valor Patrimonial.</b> Compara o preço de mercado da empresa com seu patrimônio contábil.", "t": "A utilidade varia conforme o tipo de empresa."},
+      {"n": 20, "c": "preco", "q": "P/VP abaixo de 1 significa automaticamente oportunidade?", "a": "<b>Não.</b> Pode significar que o mercado está descontando algum problema ou risco.", "t": "Descubra por que o mercado atribui aquele preço."},
+      {"n": 21, "c": "preco", "q": "Posso analisar uma ação usando apenas P/L e P/VP?", "a": "<b>Não.</b> Indicadores precisam ser analisados em conjunto com os fundamentos da empresa.", "t": "Nunca transforme um indicador isolado em decisão."},
+      {"n": 22, "c": "preco", "q": "O que é EV/Ebitda?", "a": "Relação entre o Valor da Firma (Enterprise Value) e sua geração de caixa operacional (EBITDA).", "t": "Muito usado para comparar empresas considerando suas dívidas absolutas."},
+      {"n": 23, "c": "preco", "q": "O que é Margem de Segurança?", "a": "A diferença entre o valor estimado da empresa (valor intrínseco) e o preço pelo qual ela está sendo negociada.", "t": "Protege o investidor contra erros de avaliação ou choques de mercado."},
+      {"n": 24, "c": "preco", "q": "Qual a diferença entre Preço e Valor?", "a": "<b>Preço</b> é o que você paga na cotação do dia. <b>Valor</b> é o potencial real de geração de riquezas da empresa.", "t": "“Preço é o que você paga, valor é o que você leva.” — Warren Buffett."},
+      {"n": 25, "c": "preco", "q": "O que é o efeito da inflação nas cotações?", "a": "Boas empresas conseguem repassar a inflação aos preços dos seus produtos, protegendo o patrimônio do acionista.", "t": "Analise o poder de precificação da companhia."},
+      {"n": 26, "c": "retorno", "q": "O que é Dividend Yield (DY)?", "a": "É uma medida que relaciona <b>os dividendos distribuídos com o preço da ação</b>.", "t": "DY não é promessa de dividendos futuros."},
+      {"n": 27, "c": "retorno", "q": "DY alto significa automaticamente que a ação é boa?", "a": "<b>Não.</b> Um DY elevado pode ocorrer porque a empresa distribuiu muito ou porque <b>o preço da ação caiu</b>.", "t": "Investigue a origem de um DY muito alto."},
+      {"n": 28, "c": "retorno", "q": "O que devo verificar antes de me encantar com um DY alto?", "a": "<b>Lucro, geração de caixa e histórico de distribuição de dividendos.</b>", "t": "Analise a capacidade de sustentar os dividendos."},
+      {"n": 29, "c": "retorno", "q": "Qual frase devo lembrar sobre dividendos?", "a": "<b>“Dividendo é consequência. Lucro é a origem.”</b>", "t": "Não analise dividendos isoladamente."},
+      {"n": 30, "c": "retorno", "q": "O que é Payout?", "a": "Porcentagem do lucro líquido da empresa que é distribuída aos acionistas como dividendos ou JCP.", "t": "Payout excessivamente alto (perto de 100%) pode reduzir investimentos no próprio negócio."},
+      {"n": 31, "c": "retorno", "q": "O que são Juros sobre Capital Próprio (JCP)?", "a": "Proventos pagos aos acionistas que contam como despesa no balanço da empresa, gerando benefício fiscal a ela.", "t": "Para o investidor, há retenção de Imposto de Renda na fonte."},
+      {"n": 32, "c": "retorno", "q": "O que é a Data Com e a Data Ex de um dividendo?", "a": "<b>Data Com:</b> Último dia para ter a ação e garantir o dividendo. <b>Data Ex:</b> Dia a partir do qual a compra já não dá direito ao provento.", "t": "No dia Ex, a cotação é ajustada descontando o valor do dividendo."},
+      {"n": 33, "c": "retorno", "q": "O que fazer com os dividendos recebidos no início da jornada?", "a": "<b>Reinvesti-los</b> comprando mais ações para acelerar o efeito dos juros compostos.", "t": "O reinvestimento é a chave para o efeito 'bola de neve' no longo prazo."},
+      {"n": 34, "c": "retorno", "q": "O que é recompra de ações?", "a": "Quando a própria empresa compra suas ações no mercado e as cancela.", "t": "Isso reduz as ações circulantes e aumenta sua participação relativa na empresa."},
+      {"n": 35, "c": "oportunidade", "q": "Uma ação que caiu muito está automaticamente barata?", "a": "<b>Não.</b> É preciso descobrir por que ela caiu.", "t": "Queda de preço pode ter várias causas."},
+      {"n": 36, "c": "oportunidade", "q": "Uma ação que subiu muito está automaticamente cara?", "a": "<b>Não.</b> É preciso verificar se os resultados da empresa também melhoraram.", "t": "Preço e fundamentos devem ser analisados juntos."},
+      {"n": 37, "c": "oportunidade", "q": "O que devo perguntar quando uma ação subiu bastante?", "a": "<b>“Os resultados da empresa melhoraram o suficiente para justificar essa valorização?”</b>", "t": "Procure relação entre negócio e preço."},
+      {"n": 38, "c": "oportunidade", "q": "O que devo perguntar quando uma ação está muito barata?", "a": "<b>“Por que o mercado está atribuindo um preço tão baixo a essa empresa?”</b>", "t": "Preço baixo é convite para investigar."},
+      {"n": 39, "c": "oportunidade", "q": "Qual é o erro de procurar simplesmente “a ação mais barata”?", "a": "Uma ação pode ter preço baixo porque <b>a empresa apresenta problemas ou riscos relevantes</b>.", "t": "Preço da ação não é sinônimo de valor."},
+      {"n": 40, "c": "oportunidade", "q": "O que é a armadilha do valor (Value Trap)?", "a": "Ação que parece barata por múltiplos (P/L baixo), mas a empresa está em declínio constante de lucros.", "t": "Cuidado ao comprar deterioração disfarçada de pechincha."},
+      {"n": 41, "c": "oportunidade", "q": "Como o cenário macroeconômico (juros/Selic) afeta as ações?", "a": "Juros altos tornam a renda fixa mais atraente e encarecem os empréstimos das empresas, reduzindo o consumo.", "t": "Momentos de juros altos frequentemente geram barganhas na Bolsa."},
+      {"n": 42, "c": "oportunidade", "q": "O que é volatilidade no mercado?", "a": "Oscilação frequente e intensa de preços negociados na bolsa de valores.", "t": "A volatilidade deve ser vista como oportunidade, não necessariamente risco real."},
+      {"n": 43, "c": "oportunidade", "q": "O que é diversificação de carteira?", "a": "Dividir seu dinheiro entre diferentes empresas e setores para diminuir o risco de perdas bruscas.", "t": "Evita depender do sucesso de uma única empresa."},
+      {"n": 44, "c": "oportunidade", "q": "Por que evitar 'girar a carteira' constantemente?", "a": "Vender e comprar ações toda hora gera custos operacionais, impostos e reduz os ganhos no longo prazo.", "t": "Foco na parceria com boas empresas mantidas com disciplina."},
+      {"n": 45, "c": "filtro", "q": "Qual é o BLOCO 1 do filtro?", "a": "🟩 <b>EMPRESA:</b> receita, lucro, ROE, dívida e caixa.", "t": "A empresa apresenta fundamentos que merecem ser estudados?"},
+      {"n": 46, "c": "filtro", "q": "Qual é o BLOCO 2 do filtro?", "a": "🟨 <b>PREÇO:</b> P/L, P/VP, EV/EBITDA e histórico dos múltiplos.", "t": "O preço atual parece razoável no contexto da empresa?"},
+      {"n": 47, "c": "filtro", "q": "Qual é o BLOCO 3 do filtro?", "a": "🟦 <b>RETORNO AO ACIONISTA:</b> dividendos, DY e histórico de distribuição.", "t": "O retorno ao acionista é coerente e sustentável?"},
+      {"n": 48, "c": "filtro", "q": "Qual é a pergunta final do filtro?", "a": "<b>“O preço atual faz sentido diante da qualidade e dos resultados da empresa?”</b>", "t": "É uma pergunta de investigação, não uma resposta automática."},
+      {"n": 49, "c": "filtro", "q": "Qual é a pergunta mais importante quando encontro uma possível oportunidade?", "a": "<b>“Estou encontrando uma empresa boa a um preço interessante ou uma empresa problemática a um preço aparentemente barato?”</b>", "t": "Evite a armadilha do “parece barato”."},
+      {"n": 50, "c": "filtro", "q": "Qual deve ser a sequência correta da análise?", "a": "<b>EMPRESA → RESULTADOS → FUNDAMENTOS → PREÇO → DIVIDENDOS → INVESTIGAÇÃO</b><br><br>Não é: <b>PREÇO → “ESTÁ BARATA!” → COMPRAR.</b>", "t": "Regra de ouro: primeiro entender; depois avaliar; só então investigar."}
+    ]
+  },
+  fiis: {
+    quote: "“Em Fundos Imobiliários, os imóveis e os contratos são a base, mas a qualidade da gestão e dos ativos é o que gera renda perene.”",
+    info: {
+      "estruturas": ["1", "CONCEITOS E TIPOS", "Entenda o funcionamento de Tijolo, Papel e FoFs."],
+      "indicadores": ["2", "INDICADORES ESSENCIAIS", "P/VP, Dividend Yield e Cap Rate no contexto imobiliário."],
+      "riscos": ["3", "RISCOS E ANÁLISE QUALITATIVA", "Vacância, inadimplência, localização e contratos."],
+      "renda": ["4", "PROVENTOS E FISCALIDADE", "A dinâmica do pagamento de dividendos mensais."],
+      "estrategia": ["5", "GESTÃO E MONITORAMENTO", "Análise de relatórios e tomada de decisão contínua."]
+    },
+    cards: [
+      {"n": 1, "c": "estruturas", "q": "O que é um Fundo Imobiliário (FII)?", "a": "Uma comunhão de recursos destinada à aplicação em empreendimentos imobiliários (imóveis físicos ou títulos de dívida do setor).", "t": "Permite investir em grandes imóveis fracionados via cota de bolsa."},
+      {"n": 2, "c": "estruturas", "q": "O que é um FII de Tijolo?", "a": "Fundo que investe diretamente em <b>imóveis físicos</b> (galpões logísticos, prédios corporativos, shoppings, hospitais).", "t": "Sua renda principal vem dos aluguéis dos inquilinos."},
+      {"n": 3, "c": "estruturas", "q": "O que é um FII de Papel (Títulos e Val. Mobiliários)?", "a": "Fundo que investe em <b>títulos de dívida do mercado imobiliário</b>, como CRIs (Certificados de Recebíveis Imobiliários).", "t": "Suas receitas vêm dos juros e atualizações monetárias cobrados nessas dívidas."},
+      {"n": 4, "c": "estruturas", "q": "O que é um FoF (Fundo de Fundos)?", "a": "Fundo imobiliário que compra cotas de <b>outros fundos imobiliários</b>.", "t": "Proporciona alta diversificação em uma única cota, mas exige atenção às taxas sobrepostas."},
+      {"n": 5, "c": "estruturas", "q": "O que é um Fundo Híbrido?", "a": "Fundo que combina diferentes estratégias, possuindo imóveis físicos, CRIs e até participações em outros fundos.", "t": "Oferece flexibilidade de gestão diante dos ciclos econômicos."},
+      {"n": 6, "c": "estruturas", "q": "O que é o IFIX?", "a": "É o índice de desempenho médio dos fundos imobiliários negociados na bolsa brasileira B3.", "t": "Funciona como o 'Ibovespa' do mercado de FIIs."},
+      {"n": 7, "c": "estruturas", "q": "Qual a diferença entre FII Mono-imóvel e Multi-imóvel?", "a": "<b>Mono-imóvel:</b> Possui apenas 1 prédio/ativo. <b>Multi-imóvel:</b> Possui vários prédios espalhados em localizações distintas.", "t": "Fundos multi-imóveis diluem substancialmente os riscos de vacância."},
+      {"n": 8, "c": "estruturas", "q": "Qual a diferença entre Mono-inquilino e Multi-inquilino?", "a": "<b>Mono-inquilino:</b> Apenas 1 empresa aluga todo o imóvel. <b>Multi-inquilino:</b> Várias empresas alugam o mesmo espaço.", "t": "O risco de inadimplência diminui quando há múltiplos inquilinos."},
+      {"n": 9, "c": "estruturas", "q": "O que é um Galpão Logístico?", "a": "Imóvel voltado para estocagem e distribuição de mercadorias, fundamental para o comércio eletrônico e varejo.", "t": "Costumam ter contratos longos e boa previsibilidade de receita."},
+      {"n": 10, "c": "estruturas", "q": "O que são lajes corporativas?", "a": "Andares ou prédios inteiros de escritórios alugados para grandes empresas em centros financeiros.", "t": "Dependem fortemente da saúde das grandes corporações e localizações nobres."},
+      {"n": 11, "c": "indicadores", "q": "O que indica o P/VP em um FII de Tijolo?", "a": "Compara o preço negociado na cota com o valor contábil dos imóveis avaliados por laudo técnico.", "t": "P/VP abaixo de 1 indica cota com desconto patrimonial."},
+      {"n": 12, "c": "indicadores", "q": "Por que cuidar com o P/VP em FIIs de Papel?", "a": "Porque o patrimônio do FII de Papel é dinheiro/dívida. P/VP muito acima de 1 significa pagar ágio sobre caixa puro.", "t": "Evite comprar FIIs de Papel muito acima do P/VP 1,00."},
+      {"n": 13, "c": "indicadores", "q": "O que é o Dividend Yield (DY) no contexto de FIIs?", "a": "Métrica que indica a rentabilidade dos proventos recebidos nos últimos meses dividida pelo preço atual da cota.", "t": "Em FIIs, o DY é pago de forma prioritariamente mensal."},
+      {"n": 14, "c": "indicadores", "q": "O que é Cap Rate (Taxa de Capitalização)?", "a": "Rendimento percentual anual gerado pelo imóvel em relação ao seu valor patrimonial ou de compra.", "t": "Mede o retorno bruto dos aluguéis do ativo físico."},
+      {"n": 15, "c": "indicadores", "q": "O que é a Liquidez Diária de um FII?", "a": "Volume diário de dinheiro e cotas negociadas no mercado.", "t": "Garante facilidade para comprar ou vender suas cotas sem distorcer o preço."},
+      {"n": 16, "c": "indicadores", "q": "O que representa o VPA (Valor Patrimonial por Cota)?", "a": "Soma de todos os bens e direitos do fundo subtraídos dos débitos, dividida pela quantidade total de cotas.", "t": "Representa o valor 'real' dos ativos registrados na contabilidade."},
+      {"n": 17, "c": "indicadores", "q": "Por que um DY absurdamente alto pode ser um sinal de alerta?", "a": "Pode indicar dividendos não recorrentes (venda pontual de imóvel) ou perda acentuada no valor da cota.", "t": "Sempre analise a origem do rendimento elevado."},
+      {"n": 18, "c": "indicadores", "q": "O que representa a ABL (Área Bruta Locável)?", "a": "A metragem quadrada total disponível nos imóveis para ser efetivamente alugada.", "t": "Base para calcular o valor do aluguel cobrado por m²."},
+      {"n": 19, "c": "indicadores", "q": "Como a taxa Selic (juros do país) afeta os FIIs?", "a": "Selic em alta atrai renda fixa e pode pressionar cotas para baixo. Selic em queda favorece a valorização das cotas.", "t": "Visão de longo prazo foca no fluxo mensal de caixa independente das cotações."},
+      {"n": 20, "c": "indicadores", "q": "O que é Preço de M² (Preço por Metro Quadrado)?", "a": "Soma do valor de mercado dividida pela ABL total dos imóveis.", "t": "Permite avaliar se a compra está num valor razoável por metro em relação à região."},
+      {"n": 21, "c": "riscos", "q": "O que é Vacância Física?", "a": "Porcentagem da ABL do fundo que está desocupada (sem inquilinos no momento).", "t": "Vacância física alta reduz os rendimentos mensais do fundo."},
+      {"n": 22, "c": "riscos", "q": "O que é Vacância Financeira?", "a": "Porcentagem do rendimento potencial do imóvel que não está sendo arrecadada por espaço vago ou descontos.", "t": "Mede a perda financeira de ter espaços não rentabilizados."},
+      {"n": 23, "c": "riscos", "q": "Qual a diferença entre Contrato Típico e Atípico?", "a": "<b>Típico:</b> Duração padrão de 5 anos com revisão de preço no 3º ano. <b>Atípico:</b> Duração longa (10-15 anos) com multas pesadas por rescisão.", "t": "Contratos atípicos oferecem previsibilidade muito superior."},
+      {"n": 24, "c": "riscos", "q": "O que é o risco de crédito nos FIIs de Papel?", "a": "Possibilidade da empresa emissora do CRI não pagar as parcelas da dívida (default ou calote).", "t": "Analise as garantias dos títulos e o rating de crédito do devedor."},
+      {"n": 25, "c": "riscos", "q": "O que é o Risco de Localização (LVT)?", "a": "Risco de um imóvel físico estar em regiões degradadas, distantes dos grandes centros ou sem acessibilidade.", "t": "Localização excelente (AAA) garante facilidade de recolocação em caso de vacância."},
+      {"n": 26, "c": "riscos", "q": "O que são indexadores de renda em FIIs?", "a": "Índices que reajustam anualmente os contratos de aluguel ou dívidas (ex: IPCA, IGP-M ou CDI).", "t": "Protegem a renda passiva contra a perda do poder de compra."},
+      {"n": 27, "c": "riscos", "q": "O que é o risco de renovação/revisional contratual?", "a": "Quando o contrato expira e o inquilino negocia valores de aluguel para baixo devido ao cenário imobiliário.", "t": "Acompanhe o cronograma de vencimento dos contratos no relatório gerencial."},
+      {"n": 28, "c": "riscos", "q": "O que significa 'Alavancagem' em um FII?", "a": "Quando o fundo assume dívidas para adquirir novos imóveis, comprometendo renda futura no pagamento da parcela.", "t": "Alavancagem mal gerida traz alto risco em cenários de alta de juros."},
+      {"n": 29, "c": "riscos", "q": "Como avaliar a concentração de um FII?", "a": "Checando se um único inquilino representa parcela muito alta (ex: >20%) do total de receitas do fundo.", "t": "Se o maior inquilino sair, o dividendo cairá abruptamente."},
+      {"n": 30, "c": "riscos", "q": "O que é o risco de obra/desenvolvimento?", "a": "Risco de fundos que constroem imóveis do zero passarem por atrasos, estouro de orçamento ou falta de habite-se.", "t": "Fundos de desenvolvimento pagam mais, mas exigem maior tolerância ao risco."},
+      {"n": 31, "c": "renda", "q": "Qual é a regra dos 95% do lucro nos FIIs?", "a": "Por lei, os FIIs são obrigados a distribuir no mínimo <b>95% do seu lucro caixa semestre a semestre</b> aos cotistas.", "t": "Garante o fluxo recorrente de distribuição de proventos."},
+      {"n": 32, "c": "renda", "q": "Pessoas físicas pagam Imposto de Renda sobre os dividendos de FIIs?", "a": "Atualmente, os dividendos mensais para pessoa física são **isentos de IR**, desde que seguidas as regras da bolsa.", "t": "Isenção atrativa para criação de fluxo de caixa mensal."},
+      {"n": 33, "c": "renda", "q": "A venda de cotas com lucro paga Imposto de Renda?", "a": "<b>Sim.</b> O ganho de capital com venda de cotas paga tributação de 20% sobre o lucro apurado.", "t": "O recolhimento deve ser feito via DARF pelo próprio investidor."},
+      {"n": 34, "c": "renda", "q": "A retenção de rendimentos para Reserva de Lucro é permitida?", "a": "Sim, o fundo pode reter até 5% do lucro no semestre para criar uma reserva de segurança e estabilizar rendimentos.", "t": "Evita oscilações bruscas nas distribuições do dia a dia."},
+      {"n": 35, "c": "renda", "q": "Quando costuma ser o pagamento mensal dos dividendos?", "a": "Geralmente na primeira quinzena do mês, variando segundo o regulamento do fundo.", "t": "Sempre confira a data 'Data Com' para ter direito ao provento."},
+      {"n": 36, "c": "renda", "q": "O que significa 'Amortização de Cotas'?", "a": "Devolução de parte do capital investido ao cotista. Não se confunde com rendimento/aluguel puro.", "t": "Reduz o custo de aquisição da sua cota na carteira."},
+      {"n": 37, "c": "renda", "q": "Qual a vantagem dos aluguéis mensais em relação a ter imóveis físicos diretos?", "a": "Isenção de IR na renda, sem dor de cabeça com inquilino e custo zero de manutenção de reformas pelo investidor.", "t": "A administradora faz toda a gestão do imóvel por você."},
+      {"n": 38, "c": "renda", "q": "O que é o Yield on Cost (YOC)?", "a": "Métrica que mede a rentabilidade mensal do dividendo calculada sobre o **preço que você pagou originalmente**.", "t": "Mostra a evolução do seu rendimento pessoal com o passar do tempo."},
+      {"n": 39, "c": "renda", "q": "Dividendos de FIIs garantem poder de compra eterno?", "a": "Imóveis reajustam aluguéis por inflação no tempo, mas variações operacionais acontecem.", "t": "Diversifique para manter seu poder de compra sempre protegido."},
+      {"n": 40, "c": "renda", "q": "Por que não devo gastar 100% dos dividendos no início da montagem de patrimônio?", "a": "Parte dos dividendos deve ser reinvestida para comprar novas cotas e compensar qualquer inflação ao longo do tempo.", "t": "O reinvestimento automático gera crescimento de renda constante."},
+      {"n": 41, "c": "estrategia", "q": "Onde encontrar as informações mais atualizadas de um FII?", "a": "No **Relatório Gerencial Mensal** divulgado pela administradora do fundo no site da B3 ou do Fundo.", "t": "É a leitura indispensável de todo investidor de FIIs."},
+      {"n": 42, "c": "estrategia", "q": "Qual a função da Gestora vs Administradora?", "a": "<b>Administradora:</b> Cuida do aspecto jurídico e burocrático. <b>Gestora:</b> Decide onde investir, alugar, comprar ou vender ativos.", "t": "A competência da equipe gestora determina a performance do fundo."},
+      {"n": 43, "c": "estrategia", "q": "O que são as Emissões de Cotas (Subscrição)?", "a": "Processos em que o fundo capta novos recursos para comprar mais imóveis emitindo cotas no mercado.", "t": "Cotistas antigos possuem 'Direito de Subscrição' para não serem diluídos."},
+      {"n": 44, "c": "estrategia", "q": "Vale a pena participar de um Direito de Subscrição?", "a": "Sim, caso o preço da nova cota (acrescido de taxas) seja vantajoso e a tese de crescimento do fundo seja boa.", "t": "Garante compra por preço promocional na maioria dos casos."},
+      {"n": 45, "c": "estrategia", "q": "O que é a Taxa de Administração e Taxa de Performance?", "a": "<b>Administração:</b> Custo fixo para gerenciar o fundo. <b>Performance:</b> Bônus pago à gestora quando supera um índice de referência.", "t": "Confira se a taxa de performance é justa e estimula o gestor a gerar valor."},
+      {"n": 46, "c": "estrategia", "q": "Como estruturar uma carteira inicial equilibrada de FIIs?", "a": "Balancear entre FIIs de Tijolo (Logística, Shopping, Lajes) e FIIs de Papel diversificados.", "t": "Evita exposição exagerada a um único tipo de risco econômico."},
+      {"n": 47, "c": "estrategia", "q": "O que é o Turnover (Giro) de uma carteira de FIIs?", "a": "Frequência com que o gestor compra e vende imóveis ou ativos na carteira do fundo.", "t": "Em fundos de tijolo, espera-se uma visão mais patrimonialista de longo prazo."},
+      {"n": 48, "c": "estrategia", "q": "Quando pensar em vender um FII?", "a": "Quando houver perda definitiva de fundamentos (gestão ruim, vacância irreversível, fraudes) ou mudança na tese.", "t": "Não venda apenas por oscilações temporárias de preço."},
+      {"n": 49, "c": "estrategia", "q": "O que significa 'Imóvel AAA' (Triple A)?", "a": "Classificação de altíssimo padrão construtivo, eficiência energética e moderna infraestrutura tecnológica.", "t": "São imóveis altamente desejados pelas maiores multinacionais."},
+      {"n": 50, "c": "estrategia", "q": "Qual o check-list simplificado para escolher um bom FII?", "a": "1. Multi-imóvel e Multi-inquilino<br>2. Boa localização<br>3. P/VP coerente<br>4. Baixa vacância histórica<br>5. Gestão transparente.", "t": "Seguir esses passos elimina a maioria das armadilhas do mercado."}
+    ]
+  }
+};
+
+let currentCategory = 'acoes';
+let filter = 'all';
+let answered = new Set();
+let list = [];
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem(`santonela_fc_${currentCategory}`);
+    answered = new Set(saved ? JSON.parse(saved) : []);
+  } catch(e) {
+    answered = new Set();
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem(`santonela_fc_${currentCategory}`, JSON.stringify([...answered]));
+}
+
+function updateProgress() {
+  const currentCards = database[currentCategory].cards;
+  let p = Math.round(answered.size / currentCards.length * 100);
+  document.getElementById('pt').textContent = `${answered.size} de ${currentCards.length} respondidos`;
+  document.getElementById('pb').style.width = `${p}%`;
+}
+
+function switchCategory(cat) {
+  if(currentCategory === cat) return;
+  currentCategory = cat;
+  
+  document.getElementById('tab-acoes').classList.toggle('active', cat === 'acoes');
+  document.getElementById('tab-fiis').classList.toggle('active', cat === 'fiis');
+  document.getElementById('hero-quote').textContent = database[cat].quote;
+  
+  filter = 'all';
+  document.getElementById('search').value = '';
+  
+  buildFilterButtons();
+  loadProgress();
+  list = [...database[currentCategory].cards];
+  render();
+}
+
+function buildFilterButtons() {
+  const filterContainer = document.getElementById('filter-buttons');
+  filterContainer.innerHTML = '';
+  
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter active';
+  allBtn.dataset.f = 'all';
+  allBtn.textContent = 'Todos';
+  allBtn.onclick = () => selectFilter('all', allBtn);
+  filterContainer.appendChild(allBtn);
+  
+  const categoryInfo = database[currentCategory].info;
+  Object.keys(categoryInfo).forEach(key => {
+    const btn = document.createElement('button');
+    btn.className = 'filter';
+    btn.dataset.f = key;
+    btn.textContent = `${categoryInfo[key][0]} · ${categoryInfo[key][1]}`;
+    btn.onclick = () => selectFilter(key, btn);
+    filterContainer.appendChild(btn);
+  });
+}
+
+function selectFilter(filterKey, element) {
+  document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+  element.classList.add('active');
+  filter = filterKey;
+  render();
+}
+
+function render() {
+  const term = document.getElementById('search').value.toLowerCase().trim();
+  const currentInfo = database[currentCategory].info;
+  
+  const shown = list.filter(x => 
+    (filter === 'all' || x.c === filter) &&
+    (!term || (x.q + ' ' + x.a + ' ' + x.t).toLowerCase().includes(term))
+  );
+  
+  const root = document.getElementById('sections');
+  root.innerHTML = '';
+  
+  let groups = {};
+  shown.forEach(x => (groups[x.c] ??= []).push(x));
+  
+  let count = 0;
+  
+  Object.keys(currentInfo).forEach(k => {
+    if (!groups[k]) return;
+    
+    let s = document.createElement('section');
+    s.innerHTML = `<div class="section"><div class="sn">${currentInfo[k][0]}</div><h2>${currentInfo[k][1]}</h2><small>${currentInfo[k][2]}</small></div><div class="grid"></div>`;
+    let grid = s.querySelector('.grid');
+    
+    groups[k].forEach(x => {
+      count++;
+      let card = document.createElement('article');
+      card.className = 'card' + (answered.has(x.n) ? ' flipped' : '');
+      card.innerHTML = `
+        <div class="inner">
+          <div class="face front">
+            <div class="num">${x.n}</div>
+            <div class="label">Pergunta</div>
+            <div class="q">${x.q}</div>
+            <div class="tap">Toque para revelar a resposta ↻</div>
+          </div>
+          <div class="face back">
+            <div class="num">${x.n}</div>
+            <div class="label">Resposta</div>
+            <div class="a">${x.a}</div>
+            <div class="tip">💡 ${x.t}</div>
+            <div class="tap">Toque para voltar à pergunta ↻</div>
+          </div>
+        </div>`;
+      
+      card.onclick = () => {
+        card.classList.toggle('flipped');
+        if (card.classList.contains('flipped')) {
+          answered.add(x.n);
+        } else {
+          answered.delete(x.n);
+        }
+        saveProgress();
+        updateProgress();
+      };
+      grid.appendChild(card);
+    });
+    root.appendChild(s);
+  });
+
+  document.getElementById('empty').classList.toggle('hidden', count !== 0);
+  updateProgress();
+}
+
+document.getElementById('search').oninput = render;
+
+document.getElementById('shuffle').onclick = () => {
+  list.sort(() => Math.random() - .5);
+  render();
+  scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+document.getElementById('all').onclick = () => {
+  const currentCards = database[currentCategory].cards;
+  let open = answered.size < currentCards.length;
+  answered = open ? new Set(currentCards.map(x => x.n)) : new Set();
+  saveProgress();
+  document.getElementById('all').textContent = open ? '🙈 Ocultar respostas' : '👁 Mostrar respostas';
+  render();
+};
+
+document.getElementById('reset').onclick = () => {
+  answered = new Set();
+  saveProgress();
+  document.getElementById('all').textContent = '👁 Mostrar respostas';
+  render();
+  scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+buildFilterButtons();
+loadProgress();
+list = [...database[currentCategory].cards];
+render();
+</script>
+</body>
+</html>
