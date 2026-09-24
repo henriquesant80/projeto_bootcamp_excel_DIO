@@ -25,11 +25,20 @@ O objetivo principal é ajudar o usuário a visualizar o impacto e o crescimento
 * **Recursos:** Mesclagem de células, inserção de imagem, ocultação de linhas, grades, colunas e linhas não utilizadas.
 ---
 
-##Tecnologias e Recursos Utilizados
+## Tecnologias e Recursos Utilizados
 * **Microsoft Excel:** Fórmulas e funções financeiras, formatação condicional, tabelas e gráficos para projeção patrimonial.
 
 * **HTML5 / CSS3 / JavaScript / PNG:** Construção do aplicativo de estudo com animações 3D de flip de cartão e banner de capa do projeto com uso de IA(ChatGPT e Gemini).
 
 * **Git & GitHub:** Versionamento do código e publicação pública do projeto.
+
+## Aprendizados
+* **Com a realização deste projeto, foi possível aprofundar conhecimentos em:**
+
+- Modelagem de planilhas financeiras no Excel voltadas para investimentos de longo prazo.
+
+- Análise fundamentalista básica aplicada a Ações e Fundos Imobiliários.
+
+- Criação de ferramentas complementares de estudo para retenção de conhecimento e prompts para IA.
 
 
