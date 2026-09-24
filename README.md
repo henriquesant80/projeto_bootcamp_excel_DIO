@@ -25,6 +25,11 @@ O objetivo principal é ajudar o usuário a visualizar o impacto e o crescimento
 * **Recursos:** Mesclagem de células, inserção de imagem, ocultação de linhas, grades, colunas e linhas não utilizadas.
 ---
 
-## Demonstração do Simulador
+##Tecnologias e Recursos Utilizados
+* **Microsoft Excel:** Fórmulas e funções financeiras, formatação condicional, tabelas e gráficos para projeção patrimonial.
+
+* **HTML5 / CSS3 / JavaScript / PNG:** Construção do aplicativo de estudo com animações 3D de flip de cartão e banner de capa do projeto com uso de IA(ChatGPT e Gemini).
+
+* **Git & GitHub:** Versionamento do código e publicação pública do projeto.
 
 
